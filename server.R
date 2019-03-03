@@ -18,8 +18,10 @@ shinyServer(function(input, output, session) {
     # so that Google Charts orders and colors the regions
     # consistently.
     regions <- c("Norte","Nordeste","Sudeste","Sul","Centro-Oeste")
+    mystates <- c("Bahia")
     df <- pnud_muni %>%
       mutate(reg = regions[pnud_muni$uf%/%10]) %>%
+      filter(ufn %in% input$state) %>%
       filter(ano == input$year) %>%
       select(municipio, rdpc, espvida,
         reg, pop) %>%

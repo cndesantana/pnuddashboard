@@ -56,7 +56,7 @@ shinyUI(fluidPage(
         viewWindow = xlim
       ),
       vAxis = list(
-        title = "Life expectancy (years)",
+        title = "Expectativa de vida (anos)",
         viewWindow = ylim
       ),
       # The default padding is a little too spaced out
@@ -86,10 +86,13 @@ shinyUI(fluidPage(
     )
   ),
   fluidRow(
-    shiny::column(4, offset = 4,
+    shiny::column(3, offset = 4,
       sliderInput("year", "Year", step=c(9,10,10),
         min = min(pnud_muni$ano), max = max(pnud_muni$ano),
-        value = min(pnud_muni$ano), animate = TRUE)
+        value = min(pnud_muni$ano), animate = TRUE),
+      selectInput("state", "Choose a state:",multiple = TRUE,selected="Bahia",
+                  sort(unique(pnud_muni$ufn))
+      )
     )
   )
 ))
